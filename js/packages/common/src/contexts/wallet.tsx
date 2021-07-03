@@ -13,6 +13,7 @@ import { MetaplexModal } from "../components/MetaplexModal";
 import './wallet.css'
 import { TorusWalletAdapter } from "../wallet-adapters/torus";
 
+import whitelistedPublicKey from './whitelist.json';
 
 const ASSETS_URL = 'https://raw.githubusercontent.com/solana-labs/oyster/main/assets/wallets/';
 export const WALLET_PROVIDERS = [
@@ -45,11 +46,13 @@ const WalletContext = React.createContext<{
   connected: boolean,
   select: () => void,
   provider: typeof WALLET_PROVIDERS[number] | undefined,
+  isWhitelisted: boolean
 }>({
   wallet: undefined,
   connected: false,
   select() { },
   provider: undefined,
+  isWhitelisted: false
 });
 
 export function WalletProvider({ children = null as any }) {
@@ -67,6 +70,11 @@ export function WalletProvider({ children = null as any }) {
   }, [provider, providerUrl, endpoint]);
 
   const [connected, setConnected] = useState(false);
+
+  const whitelistChecker = (pubKey: string) => {
+    return whitelistedPublicKey.find(item => item === pubKey);
+  }
+  const [isWhitelisted, setIsWhitelisted] = useState(false);
 
   useEffect(() => {
     if (wallet?.publicKey && connected) {
@@ -89,8 +97,9 @@ export function WalletProvider({ children = null as any }) {
   useEffect(() => {
     if (wallet) {
       wallet.on("connect", () => {
-        if (wallet.publicKey) {
+        if (whitelistChecker(wallet?.publicKey?.toString())) {
           setConnected(true);
+          setIsWhitelisted(true);
         }
       });
 
@@ -138,6 +147,7 @@ export function WalletProvider({ children = null as any }) {
         connected,
         select,
         provider,
+        isWhitelisted,
       }}
     >
       {children}
@@ -221,12 +231,13 @@ export function WalletProvider({ children = null as any }) {
 }
 
 export const useWallet = () => {
-  const { wallet, connected, provider, select } = useContext(WalletContext);
+  const { wallet, connected, provider, select, isWhitelisted } = useContext(WalletContext);
   return {
     wallet,
     connected,
     provider,
     select,
+    isWhitelisted,
     connect() {
       wallet ? wallet.connect() : select();
     },

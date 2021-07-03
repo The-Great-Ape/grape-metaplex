@@ -114,7 +114,7 @@ export const AuctionCard = ({
   action?: JSX.Element;
 }) => {
   const connection = useConnection();
-  const { wallet, connected, connect } = useWallet();
+  const { wallet, connected, connect, isWhitelisted } = useWallet();
   const mintInfo = useMint(auctionView.auction.info.tokenMint);
 
   const [value, setValue] = useState<number>();
@@ -227,7 +227,7 @@ export const AuctionCard = ({
           </Button>
         )}
 
-        {!hideDefaultAction && connected && !auctionView.auction.info.ended() && (
+        {!hideDefaultAction && connected && !auctionView.auction.info.ended() && isWhitelisted && (
           <Button
             type="primary"
             size="large"
