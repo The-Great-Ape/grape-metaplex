@@ -105,6 +105,7 @@ export function WalletProvider({ children = null as any }) {
 
       wallet.on("disconnect", () => {
         setConnected(false);
+        window.location.href = "/"
         notify({
           message: "Wallet update",
           description: "Disconnected from wallet",
