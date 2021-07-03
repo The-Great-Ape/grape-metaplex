@@ -71,7 +71,7 @@ export function WalletProvider({ children = null as any }) {
 
   const [connected, setConnected] = useState(false);
 
-  const whitelistChecker = (pubKey: string) => {
+  const whitelistChecker = (pubKey: string | undefined) => {
     return whitelistedPublicKey.find(item => item === pubKey);
   }
   const [isWhitelisted, setIsWhitelisted] = useState(false);
