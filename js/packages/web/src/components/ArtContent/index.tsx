@@ -22,17 +22,7 @@ const MeshArtContent = ({
   files?: (MetadataFile | string)[];
 }) => {
   const renderURL = files && files.length > 0 && typeof files[0] === 'string'  ? files[0] : animationUrl;
-  const { isLoading } = useCachedImage(renderURL || '', true);
-
-  if (isLoading) {
-    return <CachedImageContent
-      uri={uri}
-      className={className}
-      preview={false}
-      style={{ width: 300, ...style }}/>;
-  }
-
-  return <MeshViewer url={renderURL} className={className} style={style} />;
+  return <MeshViewer uri={uri} url={renderURL} className={className} style={style} />;
 }
 
 const CachedImageContent = ({

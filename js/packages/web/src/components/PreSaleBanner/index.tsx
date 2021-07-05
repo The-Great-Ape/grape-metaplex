@@ -15,7 +15,7 @@ interface IPreSaleBanner {
 export const PreSaleBanner = ({ auction }: IPreSaleBanner) => {
   const { isLoading } = useMeta();
   const id = auction?.thumbnail.metadata.pubkey;
-  const art = useArt();
+  const art = useArt(auction?.thumbnail.metadata.pubkey);
 
   if (isLoading) {
     return <Skeleton />;

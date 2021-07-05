@@ -17,6 +17,7 @@ declare global {
 
 type MeshViewerProps = {
   className?: string;
+  uri?: string;
   url?: string;
   gltf?: string;
   style?: React.CSSProperties;
@@ -225,19 +226,20 @@ export class MeshViewer extends React.Component<MeshViewerProps, {}> {
 
   render() {
     return (
-      <>
+      <div className="modelViewer">
         <model-viewer
           auto-rotate-delay="0"
           auto-rotate="true"
           auto-play="true"
           camera-controls="true"
+          disable-zoom
           src={this.props.url}
+          poster={this.props.uri}
           ar-status="not-presenting"
-          style={{
-            height: "100vh"
-          }}
+          preload
+          data-js-focus-visible
         ></model-viewer>
-      </>
+      </div>
     );
   }
 }
