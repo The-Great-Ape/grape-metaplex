@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Col, Button, InputNumber, Spin } from 'antd';
 import { MemoryRouter, Route, Redirect, Link } from 'react-router-dom';
 
@@ -33,6 +34,7 @@ import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { useMeta } from '../../contexts';
 import moment from 'moment';
 
+import auctionMapping from './auction';
 const { useWallet } = contexts.Wallet;
 
 function useGapTickCheck(
@@ -163,11 +165,32 @@ export const AuctionCard = ({
 
   const gapBidInvalid = useGapTickCheck(value, gapTick, gapTime, auctionView);
 
+  const { id } = useParams<{ id: string }>();
+  let isAllowedForThisAuction = false;
+  const auctionId = auctionMapping[id];
+
+  if (auctionId) {
+    if (auctionId.find((item: any) => item === wallet?.publicKey?.toString())) {
+      isAllowedForThisAuction = true;
+    }
+  }
   return (
     <div className="auction-container" style={style}>
       <Col>
         <AuctionNumbers auctionView={auctionView} />
         <br />
+        {/* Eligible Addresses for this Auction */}
+        {auctionId && (
+          <div>
+            <h2>Eligible Addresses for this Auction</h2>
+            <ul>
+              {auctionId.map((item: string, key: any) => (
+                <li key={key}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {/* // Eligible Addresses for this Auction */}
         {showRedemptionIssue && (
           <span>
             There was an issue redeeming or refunding your bid. Please try
@@ -227,18 +250,22 @@ export const AuctionCard = ({
           </Button>
         )}
 
-        {!hideDefaultAction && connected && !auctionView.auction.info.ended() && isWhitelisted && (
-          <Button
-            type="primary"
-            size="large"
-            className="action-btn"
-            disabled={loading}
-            onClick={() => setShowBidModal(true)}
-            style={{ marginTop: 20 }}
-          >
-            {loading ? <Spin /> : 'Place bid'}
-          </Button>
-        )}
+        {!hideDefaultAction &&
+          connected &&
+          !auctionView.auction.info.ended() &&
+          isWhitelisted &&
+          isAllowedForThisAuction && (
+            <Button
+              type="primary"
+              size="large"
+              className="action-btn"
+              disabled={loading}
+              onClick={() => setShowBidModal(true)}
+              style={{ marginTop: 20 }}
+            >
+              {loading ? <Spin /> : 'Place bid'}
+            </Button>
+          )}
 
         {!hideDefaultAction && !connected && (
           <Button
