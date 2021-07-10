@@ -8,6 +8,8 @@ import {
 } from '.';
 import { useMeta } from '../contexts';
 
+import { hiddenArtsPublicKey } from './hideItems';
+
 export const useAuction = (pubkey: PublicKey | string) => {
   const id = typeof pubkey === 'string' ? pubkey : pubkey.toBase58();
 
@@ -32,7 +34,8 @@ export const useAuction = (pubkey: PublicKey | string) => {
   } = useMeta();
 
   useEffect(() => {
-    const auction = auctions[id];
+    const auction =
+      !hiddenArtsPublicKey.find((item: any) => item === id) && auctions[id];
     if (auction) {
       const auctionView = processAccountsIntoAuctionView(
         walletPubkey,

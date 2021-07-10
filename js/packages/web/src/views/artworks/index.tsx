@@ -7,6 +7,7 @@ import { useUserArts } from '../../hooks';
 import { useMeta } from '../../contexts';
 import { CardLoader } from '../../components/MyLoader';
 import { useWallet } from '@oyster/common';
+import { hiddenArtsPublicKey } from '../../hooks/hideItems';
 
 const { TabPane } = Tabs;
 
@@ -32,8 +33,8 @@ export const ArtworksView = () => {
 
   const items =
     activeKey === ArtworkViewState.Metaplex
-      ? metadata
-      : ownedMetadata.map(m => m.metadata);
+      ? metadata.filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v))
+      : ownedMetadata.map(m => m.metadata).filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v));
 
   useEffect(() => {
     if(connected) {

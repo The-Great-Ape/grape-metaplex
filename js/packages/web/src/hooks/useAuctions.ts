@@ -21,6 +21,8 @@ import {
   getBidderKeys,
 } from '../models/metaplex';
 
+import { hiddenAuctionsPublicKey } from './hideItems';
+
 export enum AuctionViewState {
   Live = '0',
   Upcoming = '1',
@@ -145,7 +147,15 @@ export const useAuctions = (state?: AuctionViewState) => {
     }, {} as Record<string, AuctionView | undefined>);
 
     setAuctionViews(
-      (Object.values(map).filter(v => v) as AuctionView[]).sort((a, b) => {
+      (
+        Object.values(map).filter(v => {
+          return (
+            !hiddenAuctionsPublicKey.find(
+              (item: any) => item === v?.auction.pubkey.toString(),
+            ) && v
+          );
+        }) as AuctionView[]
+      ).sort((a, b) => {
         return (
           b?.auction.info.endedAt
             ?.sub(a?.auction.info.endedAt || new BN(0))

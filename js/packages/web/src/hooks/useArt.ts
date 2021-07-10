@@ -13,6 +13,8 @@ import { WhitelistedCreator } from '../models/metaplex';
 import { Cache } from 'three';
 import { useInView } from 'react-intersection-observer';
 
+import { hiddenArtsPublicKey } from './hideItems';
+
 const metadataToArt = (
   info: Metadata | undefined,
   editions: Record<string, ParsedAccount<Edition>>,
@@ -135,7 +137,14 @@ export const useArt = (id?: PublicKey | string) => {
   const key = typeof id === 'string' ? id : id?.toBase58() || '';
 
   const account = useMemo(
-    () => metadata.find(a => a.pubkey.toBase58() === key),
+    () =>
+      metadata.find(
+        a =>
+          a.pubkey.toBase58() === key &&
+          !hiddenArtsPublicKey.find(
+            (item: any) => item === a.pubkey.toString(),
+          ),
+      ),
     [key, metadata],
   );
 
@@ -162,7 +171,14 @@ export const useExtendedArt = (id?: PublicKey | string) => {
   const key = typeof id === 'string' ? id : id?.toBase58() || '';
 
   const account = useMemo(
-    () => metadata.find(a => a.pubkey.toBase58() === key),
+    () =>
+      metadata.find(
+        a =>
+          a.pubkey.toBase58() === key &&
+          !hiddenArtsPublicKey.find(
+            (item: any) => item === a.pubkey.toString(),
+          ),
+      ),
     [key, metadata],
   );
 
