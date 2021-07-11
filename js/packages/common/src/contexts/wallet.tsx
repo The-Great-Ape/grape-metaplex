@@ -97,8 +97,8 @@ export function WalletProvider({ children = null as any }) {
   useEffect(() => {
     if (wallet) {
       wallet.on("connect", () => {
+        setConnected(true);
         if (whitelistChecker(wallet?.publicKey?.toString())) {
-          setConnected(true);
           setIsWhitelisted(true);
         }
       });
