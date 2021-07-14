@@ -524,6 +524,12 @@ model-viewer::part(default-progress-bar) {
   width: 100% !important;
 }
 
+// Fix empty white space when no live auctions available
+.presale .explore .artwork-image,
+.presale .explore .artwork-image img {
+  height: auto !important;
+}
+
 @media (min-width: 768px) {
   .modelViewer > * {
     height: 500px;
@@ -540,4 +546,9 @@ model-viewer::part(default-progress-bar) {
   margin-bottom: 8px !important;
   margin-top: 8px !important;
   line-height: 48px !important;
+}
+
+// Fix black box bug behind carousel on auction viewer
+.ant-carousel .ant-image.artwork-image {
+  display: none;
 }
