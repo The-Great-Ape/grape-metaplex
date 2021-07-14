@@ -77,7 +77,7 @@ export const AuctionView = () => {
   const art = useArt(auction?.thumbnail.metadata.pubkey);
   const { ref, data } = useExtendedArt(auction?.thumbnail.metadata.pubkey);
   const creators = useCreators(auction);
-  const edition = '1 of 1';
+  const edition = art ? `${art.edition} of ${art.supply}` : '1 of 1';
   const nftCount = auction?.items.flat().length;
   const winnerCount = auction?.items.length;
 
@@ -149,7 +149,8 @@ export const AuctionView = () => {
           <Row gutter={[50, 0]} style={{ marginRight: 'unset' }}>
             <Col>
               <h6>Edition</h6>
-              <p>{(auction?.items.length || 0) > 1 ? 'Multiple' : edition}</p>
+              {!auction && <Skeleton title={{ width: "100%" }} paragraph={{ rows: 0 }} />}
+              {auction && <p className="edition">{(auction?.items.length || 0) > 1 ? 'Multiple' : edition}</p>}
             </Col>
 
             <Col>
@@ -248,7 +249,7 @@ const BidLine = (props: { bid: any; index: number; mint?: MintInfo, isCancelled?
       </Col>
       <Col span={6} style={{ textAlign: 'right' }}>
         <span title={fromLamports(bid.info.lastBid, mint).toString()}>
-        ◎{formatTokenAmount(bid.info.lastBid, mint)}
+        ◎{fromLamports(bid.info.lastBid, mint).toString()}
         </span>
       </Col>
     </Row>

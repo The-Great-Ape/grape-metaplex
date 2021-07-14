@@ -10,6 +10,7 @@ import { MetaAvatar } from '../../components/MetaAvatar';
 import { sendSignMetadata } from '../../actions/sendSignMetadata';
 import { PublicKey } from '@solana/web3.js';
 import { ViewOn } from './../../components/ViewOn';
+import { ArtType } from '../../types';
 
 const { Content } = Layout;
 
@@ -19,6 +20,16 @@ export const ArtView = () => {
 
   const connection = useConnection();
   const art = useArt(id);
+
+  let badge = '';
+  if (art.type === ArtType.NFT) {
+    badge = 'Unique';
+  } else if (art.type === ArtType.Master) {
+    badge = 'NFT 0';
+  } else if (art.type === ArtType.Print) {
+    badge = `${art.edition} of ${art.supply}`;
+  }
+
   const { ref, data } = useExtendedArt(id);
 
   // const { userAccounts } = useUserAccounts();
@@ -74,7 +85,12 @@ export const ArtView = () => {
             style={{ textAlign: 'left', fontSize: '1.4rem' }}
           >
             <Row>
-              <div className="art-page art-title" style={{ fontWeight: 700, fontSize: '4rem' }}>{art.title || <Skeleton paragraph={{ rows: 0 }} />}</div>
+              <div
+                className="art-page art-title"
+                style={{ fontWeight: 700, fontSize: '4rem' }}
+              >
+                {art.title || <Skeleton paragraph={{ rows: 0 }} />}
+              </div>
             </Row>
             <Row>
               <Col span={6}>
@@ -91,16 +107,20 @@ export const ArtView = () => {
               <Col>
                 <h6 style={{ marginTop: 5 }}>Created By</h6>
                 <div className="creators">
-                  {(art.creators || [])
-                    .map(creator => {
+                  {(art.creators || []).map(creator => {
                     return (
                       <div
-                        style={{ display: 'flex', alignItems: 'center', marginBottom: 5 }}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          marginBottom: 5,
+                        }}
                       >
                         <MetaAvatar creators={[creator]} size={64} />
                         <div>
                           <span className="creator-name">
-                            {creator.name || shortenAddress(creator.address || '')}
+                            {creator.name ||
+                              shortenAddress(creator.address || '')}
                           </span>
                           <div style={{ marginLeft: 10 }}>
                             {!creator.verified &&
@@ -133,7 +153,12 @@ export const ArtView = () => {
                 </div>
               </Col>
             </Row>
-
+            <Row>
+              <Col>
+                <h6 style={{ marginTop: 5 }}>Edition</h6>
+                <div className="edition">{badge}</div>
+              </Col>
+            </Row>
             {/* <Button
                   onClick={async () => {
                     if(!art.mint) {
