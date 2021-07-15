@@ -20,7 +20,6 @@ export const ArtView = () => {
 
   const connection = useConnection();
   const art = useArt(id);
-
   let badge = '';
   if (art.type === ArtType.NFT) {
     badge = 'Unique';
@@ -29,7 +28,6 @@ export const ArtView = () => {
   } else if (art.type === ArtType.Print) {
     badge = `${art.edition} of ${art.supply}`;
   }
-
   const { ref, data } = useExtendedArt(id);
 
   // const { userAccounts } = useUserAccounts();
@@ -156,9 +154,10 @@ export const ArtView = () => {
             <Row>
               <Col>
                 <h6 style={{ marginTop: 5 }}>Edition</h6>
-                <div className="edition">{badge}</div>
+                <div className="art-edition">{badge}</div>
               </Col>
             </Row>
+
             {/* <Button
                   onClick={async () => {
                     if(!art.mint) {
