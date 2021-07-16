@@ -140,14 +140,16 @@ export const HomeView = () => {
       <Layout>
         <Content style={{ display: 'flex', flexWrap: 'wrap' }}>
           <Col style={{ width: '100%', marginTop: 10 }}>
-            {liveAuctions.length > 1 && (<Row>
+            {<Row>
               <Tabs activeKey={activeKey}
                   onTabClick={key => setActiveKey(key as LiveAuctionViewState)}>
                   <TabPane
                     tab={<span className="tab-title">Live Auctions</span>}
                     key={LiveAuctionViewState.All}
                   >
-                    {liveAuctionsView}
+                    {liveAuctions.length > 1 ? liveAuctionsView : (
+                      <p className="empty-state-live-auctions">No Live Auctions available at the moment.</p>
+                    )}
                   </TabPane>
                   {auctionsEnded.length > 0 && (
                   <TabPane
@@ -167,7 +169,7 @@ export const HomeView = () => {
                     </TabPane>
                   )}
               </Tabs>
-            </Row>)}
+            </Row>}
           </Col>
         </Content>
       </Layout>
