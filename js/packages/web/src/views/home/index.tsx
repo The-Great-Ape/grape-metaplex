@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Layout, Row, Col, Tabs, Button } from 'antd';
+import { Layout, Row, Col, Tabs, Button, Skeleton } from 'antd';
 import Masonry from 'react-masonry-css';
 
 import { PreSaleBanner } from '../../components/PreSaleBanner';
@@ -147,8 +147,17 @@ export const HomeView = () => {
                     tab={<span className="tab-title">Live Auctions</span>}
                     key={LiveAuctionViewState.All}
                   >
-                    {liveAuctions.length > 1 ? liveAuctionsView : (
-                      <p className="empty-state-live-auctions">No Live Auctions available at the moment.</p>
+                    {isLoading ? (
+                      <Skeleton
+                        title={{ width: '100%' }}
+                        paragraph={{ rows: 0 }}
+                      />
+                    ) : liveAuctions.length >= 1 ? (
+                      liveAuctionsView
+                    ) : (
+                      <p className="empty-state-live-auctions">
+                        No Live Auctions available at the moment.
+                      </p>
                     )}
                   </TabPane>
                   {auctionsEnded.length > 0 && (
