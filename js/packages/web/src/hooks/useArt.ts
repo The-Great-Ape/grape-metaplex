@@ -5,7 +5,8 @@ import { Art, Artist, ArtType } from '../types';
 import {
   Edition,
   IMetadataExtension,
-  MasterEdition,
+  MasterEditionV1,
+  MasterEditionV2,
   Metadata,
   ParsedAccount,
 } from '@oyster/common';
@@ -18,7 +19,10 @@ import { hiddenArtsPublicKey } from './hideItems';
 const metadataToArt = (
   info: Metadata | undefined,
   editions: Record<string, ParsedAccount<Edition>>,
-  masterEditions: Record<string, ParsedAccount<MasterEdition>>,
+  masterEditions: Record<
+    string,
+    ParsedAccount<MasterEditionV1 | MasterEditionV2>
+  >,
   whitelistedCreatorsByCreator: Record<
     string,
     ParsedAccount<WhitelistedCreator>
