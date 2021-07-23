@@ -19,7 +19,7 @@ import { MetaplexModal } from '../components/MetaplexModal';
 import { TorusWalletAdapter } from '../wallet-adapters/torus';
 
 import whitelistedPublicKey from './whitelist.json';
-
+const WHITELISTING_ENABLED = false;
 const ASSETS_URL =
   'https://raw.githubusercontent.com/solana-labs/oyster/main/assets/wallets/';
 export const WALLET_PROVIDERS = [
@@ -116,6 +116,10 @@ export function WalletProvider({ children = null as any }) {
         if (wallet.publicKey) {
           setConnected(true);
           if (whitelistChecker(wallet?.publicKey?.toString())) {
+            setIsWhitelisted(true);
+          }
+
+          if (!WHITELISTING_ENABLED) {
             setIsWhitelisted(true);
           }
         }
