@@ -118,7 +118,6 @@ export function WalletProvider({ children = null as any }) {
           if (whitelistChecker(wallet?.publicKey?.toString())) {
             setIsWhitelisted(true);
           }
-
           if (!WHITELISTING_ENABLED) {
             setIsWhitelisted(true);
           }
