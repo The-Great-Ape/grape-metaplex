@@ -3,7 +3,6 @@ import { Row, Col, Divider, Layout, Tag, Button, Skeleton } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useArt, useExtendedArt } from './../../hooks';
 
-import './index.less';
 import { ArtContent } from '../../components/ArtContent';
 import { shortenAddress, useConnection, useWallet } from '@oyster/common';
 import { MetaAvatar } from '../../components/MetaAvatar';
