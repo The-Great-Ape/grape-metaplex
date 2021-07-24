@@ -10,4 +10,5 @@ yarn prestart
 echo "Building 'web'..."
 # TODO: fix linting errors!
 CI=false && yarn build
+CI=false && yarn export
 echo "#done"
