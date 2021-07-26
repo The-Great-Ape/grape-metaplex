@@ -57,7 +57,7 @@ export const AuctionItem = ({
     position: index !== 0 ? 'absolute' : 'static',
     zIndex: -1 * index,
     marginLeft: size > 1 && index === 0 ? '0px' : 'auto',
-    background: 'black',
+    background: 'transparent',
     boxShadow: 'rgb(0 0 0 / 10%) 12px 2px 20px 14px',
     height: 300,
   };
