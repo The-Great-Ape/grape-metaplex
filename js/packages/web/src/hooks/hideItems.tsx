@@ -6,6 +6,7 @@ export const hiddenAuctionsPublicKey: any = [
   'J4offy7i2FuRYaXwFdS3fwr6ptimWPpWMmiAk1tV4rst', // Grape won 1 auction for standard NFT
   '2mjTrt3izyX6k98t8t1wRfqKvwLMKAwteFyqM5hnNRMT', // Failed attempt 60 bidders
   '4k8ZKS26uNYizrzAS54eX21JCAG6QC5eYLZkcxp8Ukex', // Accidentally created 1 auction out of 75 no one bid on it
+  'D2vtFfPpjdAHtW2mwMwiWXCi4PDtFe8UZp9cCntNQycU', // Alex accidentally created this auction, he was planned to just test the NFT
 ];
 
 export const hiddenArtsPublicKey: any = [
@@ -13,4 +14,5 @@ export const hiddenArtsPublicKey: any = [
   // 'A7bqTwaj23tz3Ge6MvvH4BccmQsps1ZPxhPkzzKeaEBx', // Premium NFT - NFT 0
   // '6vXcKhH7YMxa5Wysy6Rc2fcd1UBJcMmmrwjiAJUYESLC', // Standard NFT - NFT 0
   'BaCUYfNfmufMRhw2jwrBXQXv3DdYJsoYvkVAnzEPjWuU', // Unused art
+  'C4cLCmzqra3KCXSgqX6NreRYxvNtBadTBEUGxbZhv1sY', // Alex accidentally created this auction, he was planned to just test the NFT
 ];
