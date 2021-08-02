@@ -7,6 +7,7 @@ export const hiddenAuctionsPublicKey: any = [
   '2mjTrt3izyX6k98t8t1wRfqKvwLMKAwteFyqM5hnNRMT', // Failed attempt 60 bidders
   '4k8ZKS26uNYizrzAS54eX21JCAG6QC5eYLZkcxp8Ukex', // Accidentally created 1 auction out of 75 no one bid on it
   'D2vtFfPpjdAHtW2mwMwiWXCi4PDtFe8UZp9cCntNQycU', // Alex accidentally created this auction, he was planned to just test the NFT
+  '51KrDHKaAA58TnqCJJBchNfUT1QfbbJuskmAUeryiSSu', // Workplace ticket showing as NFT 0 hiding for now.
 ];
 
 export const hiddenArtsPublicKey: any = [
