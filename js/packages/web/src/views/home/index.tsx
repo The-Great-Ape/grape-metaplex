@@ -57,7 +57,7 @@ export const HomeView = () => {
       if (flag == 1) return true; else return false;
   };
 
-  const resaleAuctions = auctions.filter(m => checkPrimarySale(m) == true);
+  const resaleAuctions = auctions.filter(m => checkPrimarySale(m) == false);
 
   // Removed resales from live auctions
   const liveAuctions = auctions

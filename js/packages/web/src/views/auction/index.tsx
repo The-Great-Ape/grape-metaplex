@@ -46,17 +46,17 @@ export const AuctionItem = ({
 }) => {
   const id = item.metadata.pubkey;
   var style: React.CSSProperties = {
-    transform:
-      index === 0
-        ? ''
-        : `translate(${index * 15}px, ${-40 * index}px) scale(${Math.max(
-            1 - 0.2 * index,
-            0,
-          )})`,
-    transformOrigin: 'right bottom',
-    position: index !== 0 ? 'absolute' : 'static',
-    zIndex: -1 * index,
-    marginLeft: size > 1 && index === 0 ? '0px' : 'auto',
+    // transform:
+    //   index === 0
+    //     ? ''
+    //     : `translate(${index * 15}px, ${-40 * index}px) scale(${Math.max(
+    //         1 - 0.2 * index,
+    //         0,
+    //       )})`,
+    // transformOrigin: 'right bottom',
+    // position: index !== 0 ? 'absolute' : 'static',
+    // zIndex: -1 * index,
+    // marginLeft: size > 1 && index === 0 ? '0px' : 'auto',
     background: 'transparent',
     boxShadow: 'rgb(0 0 0 / 10%) 12px 2px 20px 14px',
     height: 300,
