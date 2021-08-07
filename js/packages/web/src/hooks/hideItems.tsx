@@ -8,7 +8,7 @@ export const hiddenAuctionsPublicKey: any = [
   '4k8ZKS26uNYizrzAS54eX21JCAG6QC5eYLZkcxp8Ukex', // Accidentally created 1 auction out of 75 no one bid on it
   'D2vtFfPpjdAHtW2mwMwiWXCi4PDtFe8UZp9cCntNQycU', // Alex accidentally created this auction, he was planned to just test the NFT
   '51KrDHKaAA58TnqCJJBchNfUT1QfbbJuskmAUeryiSSu', // Workplace ticket showing as NFT 0 hiding for now.
-  '7fxmTs7VibZYWjvYWSc4vuLk9xLj4rwZawQpusyfBwv'
+  '7fxmTs7VibZYWjvYWSc4vuLk9xLj4rwZawQpusyfBwv',
   '2TiyLqg8Y8YamDQ18NCmXR3rP96rTkLQBBbYHgoHvnEv'
 ];
 
@@ -21,5 +21,4 @@ export const hiddenArtsPublicKey: any = [
   '5KFvNvZn6pK35NdZCVkY2UpXv73yAEjkYSnX77kAMdEV',
   'CtJfvQrGyZLijohECB2cHBSb6XaxhhkzUt4wcrPJY1aQ',
   'C4cLCmzqra3KCXSgqX6NreRYxvNtBadTBEUGxbZhv1sY'
-  
 ];
