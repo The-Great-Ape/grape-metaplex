@@ -13,6 +13,7 @@ import {
 import { WhitelistedCreator } from '../models/metaplex';
 import { Cache } from 'three';
 import { useInView } from 'react-intersection-observer';
+import { pubkeyToString } from '../utils/pubkeyToString';
 
 import { hiddenArtsPublicKey } from './hideItems';
 
@@ -138,7 +139,7 @@ export const useArt = (id?: PublicKey | string) => {
   const { metadata, editions, masterEditions, whitelistedCreatorsByCreator } =
     useMeta();
 
-  const key = typeof id === 'string' ? id : id?.toBase58() || '';
+  const key = pubkeyToString(id);
 
   const account = useMemo(
     () =>
@@ -172,7 +173,7 @@ export const useExtendedArt = (id?: PublicKey | string) => {
   const [data, setData] = useState<IMetadataExtension>();
   const { ref, inView } = useInView();
 
-  const key = typeof id === 'string' ? id : id?.toBase58() || '';
+  const key = pubkeyToString(id);
 
   const account = useMemo(
     () =>

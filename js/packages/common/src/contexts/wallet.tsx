@@ -15,8 +15,8 @@ import { useLocalStorageState } from '../utils/utils';
 import { PhantomWalletAdapter } from '../wallet-adapters/phantom';
 import { useLocation } from 'react-router';
 import { MetaplexModal } from '../components/MetaplexModal';
-
 import { TorusWalletAdapter } from '../wallet-adapters/torus';
+import { SolflareWalletAdapter } from '../wallet-adapters/solflare';
 
 import whitelistedPublicKey from './whitelist.json';
 const WHITELISTING_ENABLED = false;
@@ -28,6 +28,12 @@ export const WALLET_PROVIDERS = [
     url: 'https://www.phantom.app',
     icon: `https://www.phantom.app/img/logo.png`,
     adapter: PhantomWalletAdapter,
+  },
+  {
+    name: 'Solflare',
+    url: 'https://solflare.com',
+    icon: `${ASSETS_URL}solflare.svg`,
+    adapter: SolflareWalletAdapter,
   },
   {
     name: 'Sollet',
