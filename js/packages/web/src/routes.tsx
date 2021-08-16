@@ -56,7 +56,7 @@ export function Routes() {
                           />
                           <Route
                             exact
-                            path="/artworks/:id?"
+                            path="/nfts/:id?"
                             component={() => <ArtworksView />}
                           />
                           <Route
