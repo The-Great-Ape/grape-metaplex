@@ -11,6 +11,8 @@ export const hiddenAuctionsPublicKey: any = [
   '7fxmTs7VibZYWjvYWSc4vuLk9xLj4rwZawQpusyfBwv',
   '2TiyLqg8Y8YamDQ18NCmXR3rP96rTkLQBBbYHgoHvnEv',
   'DALw8zad6b25qyNT86ovqUbHkGknFwbgSu76Yjy4mLFR', // Pixelmoon's alex 100 winners
+  'GrdkbH265faB3zqagbrufw7Kzvprv2dkLnRBGr2Zty3s', // Pixelmoon's alex 100 winners
+  'ZVHB5E5nFBKPug5whqPiALzy8SGuBARgoAVm8nHBLEo', // Pixelmoon's alex 100 winners
 ];
 
 export const hiddenArtsPublicKey: any = [
