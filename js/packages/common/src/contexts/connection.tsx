@@ -34,7 +34,7 @@ export type ENV =
 export const ENDPOINTS = [
   {
     name: 'mainnet-beta' as ENV,
-    endpoint: 'https://free.rpcpool.com',
+    endpoint: 'https://api.metaplex.solana.com/',
     ChainId: ChainId.MainnetBeta,
   },
   {
