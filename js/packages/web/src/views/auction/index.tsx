@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col, Button, Skeleton, Carousel } from 'antd';
 import { AuctionCard } from '../../components/AuctionCard';
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection } from '@solana/web3.js';
 import {
   AuctionView as Auction,
   AuctionViewItem,
@@ -25,6 +25,8 @@ import {
   useMint,
   useWallet,
   AuctionState,
+  StringPublicKey,
+  toPublicKey,
 } from '@oyster/common';
 import { MintInfo } from '@solana/spl-token';
 import { getHandleAndRegistryKey } from '@solana/spl-name-service';
@@ -80,7 +82,7 @@ export const AuctionView = () => {
   const art = useArt(auction?.thumbnail.metadata.pubkey);
   const { ref, data } = useExtendedArt(auction?.thumbnail.metadata.pubkey);
   const creators = useCreators(auction);
-  let edition = ''
+  let edition = '';
   if (art.type === ArtType.NFT) {
     edition = 'Unique';
   } else if (art.type === ArtType.Master) {
@@ -98,7 +100,7 @@ export const AuctionView = () => {
     ...(auction?.items
       .flat()
       .reduce((agg, item) => {
-        agg.set(item.metadata.pubkey.toBase58(), item);
+        agg.set(item.metadata.pubkey, item);
         return agg;
       }, new Map<string, AuctionViewItem>())
       .values() || []),
@@ -110,7 +112,7 @@ export const AuctionView = () => {
 
     return (
       <AuctionItem
-        key={item.metadata.pubkey.toBase58()}
+        key={item.metadata.pubkey}
         item={item}
         index={index}
         size={arr.length}
@@ -148,7 +150,7 @@ export const AuctionView = () => {
             )}
           </h1>
           <h6>About this {nftCount === 1 ? 'NFT' : 'Collection'}</h6>
-          <p>
+          <div className="auction-paragraph">
             {hasDescription && <Skeleton paragraph={{ rows: 3 }} />}
             {description ||
               (winnerCount !== undefined && (
@@ -156,7 +158,7 @@ export const AuctionView = () => {
                   No description provided.
                 </div>
               ))}
-          </p>
+          </div>
           {/* {auctionData[id] && (
             <>
               <h6>About this Auction</h6>
@@ -172,8 +174,14 @@ export const AuctionView = () => {
           <Row gutter={[50, 0]} style={{ marginRight: 'unset' }}>
             <Col>
               <h6>Edition</h6>
-              {!auction && <Skeleton title={{ width: "100%" }} paragraph={{ rows: 0 }} />}
-              {auction && <p className="auction-art-edition">{(auction?.items.length || 0) > 1 ? 'Multiple' : edition}</p>}
+              {!auction && (
+                <Skeleton title={{ width: '100%' }} paragraph={{ rows: 0 }} />
+              )}
+              {auction && (
+                <p className="auction-art-edition">
+                  {(auction?.items.length || 0) > 1 ? 'Multiple' : edition}
+                </p>
+              )}
             </Col>
 
             <Col>
@@ -211,10 +219,16 @@ export const AuctionView = () => {
   );
 };
 
-const BidLine = (props: { bid: any; index: number; mint?: MintInfo, isCancelled?: boolean, isActive?: boolean }) => {
+const BidLine = (props: {
+  bid: any;
+  index: number;
+  mint?: MintInfo;
+  isCancelled?: boolean;
+  isActive?: boolean;
+}) => {
   const { bid, index, mint, isCancelled, isActive } = props;
   const { wallet } = useWallet();
-  const bidder = bid.info.bidderPubkey.toBase58();
+  const bidder = bid.info.bidderPubkey;
   const isme = wallet?.publicKey?.toBase58() === bidder;
 
   // Get Twitter Handle from address
@@ -223,12 +237,12 @@ const BidLine = (props: { bid: any; index: number; mint?: MintInfo, isCancelled?
   useEffect(() => {
     const getTwitterHandle = async (
       connection: Connection,
-      bidder: PublicKey,
+      bidder: StringPublicKey,
     ): Promise<string | undefined> => {
       try {
         const [twitterHandle] = await getHandleAndRegistryKey(
           connection,
-          bidder,
+          toPublicKey(bidder),
         );
         setBidderTwitterHandle(twitterHandle);
       } catch (err) {
@@ -246,7 +260,7 @@ const BidLine = (props: { bid: any; index: number; mint?: MintInfo, isCancelled?
         alignItems: 'center',
         padding: '3px 0',
         position: 'relative',
-        opacity: isActive ? undefined: 0.5,
+        opacity: isActive ? undefined : 0.5,
         ...(isme
           ? {
               backgroundColor: '#ffffff21',
@@ -254,7 +268,19 @@ const BidLine = (props: { bid: any; index: number; mint?: MintInfo, isCancelled?
           : {}),
       }}
     >
-      {isCancelled && <div style={{ position: 'absolute', left: 0, width: '100%', height: 1, background: 'grey', top: 'calc(50% - 1px)', zIndex: 2 }}/>}
+      {isCancelled && (
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            width: '100%',
+            height: 1,
+            background: 'grey',
+            top: 'calc(50% - 1px)',
+            zIndex: 2,
+          }}
+        />
+      )}
       <Col
         span={2}
         style={{
@@ -262,20 +288,22 @@ const BidLine = (props: { bid: any; index: number; mint?: MintInfo, isCancelled?
           paddingRight: 10,
         }}
       >
-        {!isCancelled && <div
-          style={{
-            opacity: 0.8,
-            fontWeight: 700,
-          }}
-        >
-          {isme && (
-            <>
-              <CheckOutlined />
-              &nbsp;
-            </>
-          )}
-          {index + 1}
-        </div>}
+        {!isCancelled && (
+          <div
+            style={{
+              opacity: 0.8,
+              fontWeight: 700,
+            }}
+          >
+            {isme && (
+              <>
+                <CheckOutlined />
+                &nbsp;
+              </>
+            )}
+            {index + 1}
+          </div>
+        )}
       </Col>
       <Col span={16}>
         <Row>
@@ -324,23 +352,29 @@ export const AuctionBids = ({
   const winnersCount = auctionView?.auction.info.bidState.max.toNumber() || 0;
   const activeBids = auctionView?.auction.info.bidState.bids || [];
   const activeBidders = useMemo(() => {
-    return new Set(activeBids.map(b => b.key.toBase58()))
+    return new Set(activeBids.map(b => b.key));
   }, [activeBids]);
 
-  const auctionState = auctionView ? auctionView.auction.info.state : AuctionState.Created;
+  const auctionState = auctionView
+    ? auctionView.auction.info.state
+    : AuctionState.Created;
   const bidLines = useMemo(() => {
     let activeBidIndex = 0;
     return bids.map((bid, index) => {
-      let isCancelled = (index < winnersCount  && !!bid.info.cancelled) ||
+      let isCancelled =
+        (index < winnersCount && !!bid.info.cancelled) ||
         (auctionState !== AuctionState.Ended && !!bid.info.cancelled);
 
-      let line = <BidLine
-        bid={bid}
-        index={activeBidIndex}
-        key={index}
-        mint={mint}
-        isCancelled={isCancelled}
-        isActive={!bid.info.cancelled} />;
+      let line = (
+        <BidLine
+          bid={bid}
+          index={activeBidIndex}
+          key={index}
+          mint={mint}
+          isCancelled={isCancelled}
+          isActive={!bid.info.cancelled}
+        />
+      );
 
       if (!isCancelled) {
         activeBidIndex++;

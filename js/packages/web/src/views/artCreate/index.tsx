@@ -30,9 +30,10 @@ import {
   MetaplexModal,
   MetaplexOverlay,
   MetadataFile,
+  StringPublicKey,
 } from '@oyster/common';
 import { getAssetCostToStore, LAMPORT_MULTIPLIER } from '../../utils/assets';
-import { Connection, PublicKey } from '@solana/web3.js';
+import { Connection } from '@solana/web3.js';
 import { MintLayout } from '@solana/spl-token';
 import { useHistory, useParams } from 'react-router-dom';
 import { cleanName, getLast } from '../../utils/utils';
@@ -54,9 +55,8 @@ export const ArtCreateView = () => {
   const [step, setStep] = useState<number>(0);
   const [stepsVisible, setStepsVisible] = useState<boolean>(true);
   const [progress, setProgress] = useState<number>(0);
-  const [nft, setNft] = useState<{ metadataAccount: PublicKey } | undefined>(
-    undefined,
-  );
+  const [nft, setNft] =
+    useState<{ metadataAccount: StringPublicKey } | undefined>(undefined);
   const [files, setFiles] = useState<File[]>([]);
   const [attributes, setAttributes] = useState<IMetadataExtension>({
     name: '',
@@ -697,9 +697,8 @@ const RoyaltiesSplitter = (props: {
           };
 
           return (
-            <Col span={24}>
+            <Col span={24} key={idx}>
               <Row
-                key={idx}
                 align="middle"
                 gutter={[0, 16]}
                 style={{ margin: '5px auto' }}
@@ -899,7 +898,7 @@ const RoyaltiesStep = (props: {
             ].map(
               c =>
                 new Creator({
-                  address: new PublicKey(c.value),
+                  address: c.value,
                   verified: c.value === wallet?.publicKey?.toBase58(),
                   share:
                     royalties.find(r => r.creatorKey === c.value)?.amount ||
@@ -1062,7 +1061,7 @@ const WaitingStep = (props: {
 
 const Congrats = (props: {
   nft?: {
-    metadataAccount: PublicKey;
+    metadataAccount: StringPublicKey;
   };
 }) => {
   const history = useHistory();
