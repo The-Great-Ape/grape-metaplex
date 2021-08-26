@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useCreatorArts, useUserArts } from '../../hooks';
 import { useMeta } from '../../contexts';
 import { CardLoader } from '../../components/MyLoader';
-import { useWallet } from '@oyster/common';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { hiddenArtsPublicKey } from '../../hooks/hideItems';
 
 const { TabPane } = Tabs;
@@ -20,9 +20,9 @@ export enum ArtworkViewState {
 }
 
 export const ArtworksView = () => {
-  const { connected, wallet } = useWallet();
+  const { connected, publicKey } = useWallet();
   const ownedMetadata = useUserArts();
-  const createdMetadata = useCreatorArts(wallet?.publicKey?.toBase58() || '');
+  const createdMetadata = useCreatorArts(publicKey?.toBase58() || '');
   const { metadata, isLoading } = useMeta();
   const [activeKey, setActiveKey] = useState(ArtworkViewState.Metaplex);
   const breakpointColumnsObj = {
@@ -33,14 +33,14 @@ export const ArtworksView = () => {
   };
 
   const items =
-    (activeKey === ArtworkViewState.Owned
+    activeKey === ArtworkViewState.Owned
       ? ownedMetadata.map(m => m.metadata).filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v))
-      : (activeKey === ArtworkViewState.Created
-        ? createdMetadata.filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v))
-        : metadata.filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v))));
+      : activeKey === ArtworkViewState.Created
+      ? createdMetadata.filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v))
+      : metadata.filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v));
 
   useEffect(() => {
-    if(connected) {
+    if (connected) {
       setActiveKey(ArtworkViewState.Owned);
     } else {
       setActiveKey(ArtworkViewState.Metaplex);

@@ -1,5 +1,5 @@
-import React from "react"
-import ContentLoader from "react-content-loader"
+import React from 'react';
+import ContentLoader from 'react-content-loader';
 
 export const CardLoader = () => (
   <ContentLoader
@@ -16,7 +16,7 @@ export const CardLoader = () => (
     <rect x="24" y="322" rx="6" ry="6" width="44" height="25" />
     {/* <rect x="9" y="320" rx="5" ry="6" width="232" height="54" />  */}
   </ContentLoader>
-)
+);
 
 export const ThreeDots = () => (
   <ContentLoader
@@ -25,12 +25,12 @@ export const ThreeDots = () => (
     width={212}
     backgroundColor="transparent"
     style={{
-      width: "100%",
-      margin: "auto",
+      width: '100%',
+      margin: 'auto',
     }}
   >
     <circle cx="86" cy="100" r="8" />
     <circle cx="106" cy="100" r="8" />
     <circle cx="126" cy="100" r="8" />
   </ContentLoader>
-)
+);
