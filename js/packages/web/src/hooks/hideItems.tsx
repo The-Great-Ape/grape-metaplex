@@ -16,12 +16,14 @@ export const hiddenAuctionsPublicKey: any = [
 ];
 
 export const hiddenArtsPublicKey: any = [
-    // '2GwHNFetkD5U319DBBN7VK9J4Z3z6La8DnUN8Hbhot4e', // Premium NFT - 1 of 1
-   // 'A7bqTwaj23tz3Ge6MvvH4BccmQsps1ZPxhPkzzKeaEBx', // Premium NFT - NFT 0
-   // '6vXcKhH7YMxa5Wysy6Rc2fcd1UBJcMmmrwjiAJUYESLC', // Standard NFT - NFT 0
+  // '2GwHNFetkD5U319DBBN7VK9J4Z3z6La8DnUN8Hbhot4e', // Premium NFT - 1 of 1
+  // 'A7bqTwaj23tz3Ge6MvvH4BccmQsps1ZPxhPkzzKeaEBx', // Premium NFT - NFT 0
+  // '6vXcKhH7YMxa5Wysy6Rc2fcd1UBJcMmmrwjiAJUYESLC', // Standard NFT - NFT 0
   'BaCUYfNfmufMRhw2jwrBXQXv3DdYJsoYvkVAnzEPjWuU', // Unused art
   'C4cLCmzqra3KCXSgqX6NreRYxvNtBadTBEUGxbZhv1sY', // Alex accidentally created this auction, he was planned to just test the NFT
   '5KFvNvZn6pK35NdZCVkY2UpXv73yAEjkYSnX77kAMdEV',
   'CtJfvQrGyZLijohECB2cHBSb6XaxhhkzUt4wcrPJY1aQ',
   'C4cLCmzqra3KCXSgqX6NreRYxvNtBadTBEUGxbZhv1sY',
+  'GU4SNPW85sXNZGir8RQ2ZA7wDaUKT7mTcoFJZQkxbzdV', // Alex's step finance broken image IDK
+  '3bSogarRteSq1MQDAw9HeXw3a9S3d7pKj7M9uR4PvVcS', // Alex's unverified art BOP pixel moon
 ];
