@@ -146,11 +146,25 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
         return result;
       }
 
-      const whitelistedCreators = Object.values(
-        tempCache.whitelistedCreatorsByCreator,
-      );
+      const whitelistedCreators = [
+        tempCache.whitelistedCreatorsByCreator[
+          'GrapevviL94JZRiZwn2LjpWtmDacXU8QhAJvzpUMMFdL'
+        ], // Grape Main
+        tempCache.whitelistedCreatorsByCreator[
+          '72RkLRknp3qXeVqtpQp3NRfmgTYHmaC9W4w2tiQy3ZrX'
+        ], // Grape Community
+        tempCache.whitelistedCreatorsByCreator[
+          '9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94'
+        ], // Alex Perts
+        tempCache.whitelistedCreatorsByCreator[
+          'CinHb6Xt2PnqKUkmhRo9hwUkixCcsH1uviuQqaTxwT9i'
+        ], // Whale's Friend
+      ];
 
-      if (whitelistedCreators.length > 3) {
+      console.log(tempCache.whitelistedCreatorsByCreator);
+      console.log(whitelistedCreators);
+
+      if (whitelistedCreators.length > 4) {
         console.log(' too many creators, pulling all nfts in one go');
         additionalPromises.push(
           getProgramAccounts(connection, METADATA_PROGRAM_ID).then(
