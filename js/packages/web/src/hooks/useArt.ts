@@ -15,8 +15,6 @@ import { Cache } from 'three';
 import { useInView } from 'react-intersection-observer';
 import { pubkeyToString } from '../utils/pubkeyToString';
 
-import { hiddenArtsPublicKey } from './hideItems';
-
 const metadataToArt = (
   info: Metadata | undefined,
   editions: Record<string, ParsedAccount<Edition>>,
