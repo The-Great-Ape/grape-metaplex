@@ -85,6 +85,7 @@ export const processMetaData: ProcessAccountsFunc = (
 };
 
 const isMetadataAccount = (account: AccountInfo<Buffer>) => {
+  if (account?.owner == undefined) return false;
   return (account.owner as unknown as any) === METADATA_PROGRAM_ID;
 };
 

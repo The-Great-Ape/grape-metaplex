@@ -155,9 +155,6 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
         tempCache.whitelistedCreatorsByCreator[
           '9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94'
         ], // Alex Perts
-        tempCache.whitelistedCreatorsByCreator[
-          'CinHb6Xt2PnqKUkmhRo9hwUkixCcsH1uviuQqaTxwT9i'
-        ], // Whale's Friend
       ];
 
       console.log(tempCache.whitelistedCreatorsByCreator);
