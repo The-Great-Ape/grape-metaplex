@@ -157,10 +157,7 @@ export const loadAccounts = async (connection: Connection, all: boolean) => {
         ], // Alex Perts
       ];
 
-      console.log(tempCache.whitelistedCreatorsByCreator);
-      console.log(whitelistedCreators);
-
-      if (whitelistedCreators.length > 4) {
+      if (whitelistedCreators.length > 3) {
         console.log(' too many creators, pulling all nfts in one go');
         additionalPromises.push(
           getProgramAccounts(connection, METADATA_PROGRAM_ID).then(
