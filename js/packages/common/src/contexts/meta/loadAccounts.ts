@@ -36,21 +36,21 @@ import { getEmptyMetaState } from './getEmptyMetaState';
 import { getMultipleAccounts } from '../accounts/getMultipleAccounts';
 
 export const USE_SPEED_RUN = false;
-const WHITELISTED_METADATA = ['98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte'];
-const WHITELISTED_AUCTION = ['D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e'];
+const WHITELISTED_METADATA = ['67htT7jqnCAggXZguyNGcE8t4Qmd3ATAbmhvkKyUTCRk'];
+const WHITELISTED_AUCTION = ['DQQJwcsTZj4UyUP26eYHS6MiVJtS2pdAQ9cJduS8opju'];
 const AUCTION_TO_METADATA: Record<string, string[]> = {
-  D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e: [
-    '98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte',
+  DQQJwcsTZj4UyUP26eYHS6MiVJtS2pdAQ9cJduS8opju: [
+    '67htT7jqnCAggXZguyNGcE8t4Qmd3ATAbmhvkKyUTCRk',
   ],
 };
 const AUCTION_TO_VAULT: Record<string, string> = {
-  D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e:
-    '3wHCBd3fYRPWjd5GqzrXanLJUKRyU3nECKbTPKfVwcFX',
+  DQQJwcsTZj4UyUP26eYHS6MiVJtS2pdAQ9cJduS8opju:
+    '9KB45bd1rnZfxnUGLRZBvE1w12yRcMbJPFUPR9dZYrCY',
 };
 const WHITELISTED_AUCTION_MANAGER = [
-  '3HD2C8oCL8dpqbXo8hq3CMw6tRSZDZJGajLxnrZ3ZkYx',
+  'GqbydNNPckscA8FHn6hpedvUuTXx4tCSTiJGvSu44WQm',
 ];
-const WHITELISTED_VAULT = ['3wHCBd3fYRPWjd5GqzrXanLJUKRyU3nECKbTPKfVwcFX'];
+const WHITELISTED_VAULT = ['9KB45bd1rnZfxnUGLRZBvE1w12yRcMbJPFUPR9dZYrCY'];
 
 async function getProgramAccounts(
   connection: Connection,
