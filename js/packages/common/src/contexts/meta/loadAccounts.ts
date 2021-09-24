@@ -35,7 +35,7 @@ import { ParsedAccount } from '../accounts/types';
 import { getEmptyMetaState } from './getEmptyMetaState';
 import { getMultipleAccounts } from '../accounts/getMultipleAccounts';
 
-export const USE_SPEED_RUN = false;
+export const USE_SPEED_RUN = true;
 const WHITELISTED_METADATA = ['67htT7jqnCAggXZguyNGcE8t4Qmd3ATAbmhvkKyUTCRk'];
 const WHITELISTED_AUCTION = ['DQQJwcsTZj4UyUP26eYHS6MiVJtS2pdAQ9cJduS8opju'];
 const AUCTION_TO_METADATA: Record<string, string[]> = {
