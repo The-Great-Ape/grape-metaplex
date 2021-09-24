@@ -34,10 +34,27 @@ export const ArtworksView = () => {
 
   const items =
     activeKey === ArtworkViewState.Owned
-      ? ownedMetadata.map(m => m.metadata).filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v))
+      ? ownedMetadata
+          .map(m => m.metadata)
+          .filter(
+            v =>
+              !hiddenArtsPublicKey.find(
+                (item: any) => item === v.pubkey.toString() && v,
+              ),
+          )
       : activeKey === ArtworkViewState.Created
-      ? createdMetadata.filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v))
-      : metadata.filter(v => !hiddenArtsPublicKey.find((item: any) => item === v.pubkey.toString() && v));
+      ? createdMetadata.filter(
+          v =>
+            !hiddenArtsPublicKey.find(
+              (item: any) => item === v.pubkey.toString() && v,
+            ),
+        )
+      : metadata.filter(
+          v =>
+            !hiddenArtsPublicKey.find(
+              (item: any) => item === v.pubkey.toString() && v,
+            ),
+        );
 
   useEffect(() => {
     if (connected) {

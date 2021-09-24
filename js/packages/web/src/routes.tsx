@@ -31,11 +31,7 @@ export function Routes() {
               path="/art/create/:step_param?"
               component={() => <ArtCreateView />}
             />
-            <Route
-              exact
-              path="/nfts/:id?"
-              component={() => <ArtworksView />}
-            />
+            <Route exact path="/nfts/:id?" component={() => <ArtworksView />} />
             <Route exact path="/art/:id" component={() => <ArtView />} />
             <Route exact path="/artists/:id" component={() => <ArtistView />} />
             <Route exact path="/artists" component={() => <ArtistsView />} />

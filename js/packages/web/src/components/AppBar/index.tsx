@@ -56,9 +56,7 @@ const DefaultActions = ({ vertical = false }: { vertical?: boolean }) => {
         <Button className="app-btn">Auctions</Button>
       </Link>
       <Link to={`/nfts`}>
-        <Button className="app-btn">
-          {connected ? 'My NFTs' : 'NFTs'}
-        </Button>
+        <Button className="app-btn">{connected ? 'My NFTs' : 'NFTs'}</Button>
       </Link>
       <Link to={`/artists`}>
         <Button className="app-btn">Artists</Button>

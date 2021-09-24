@@ -1,10 +1,4 @@
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { CACHE_PATH } from './constants';
-import path from 'path';
-import fs from 'fs';
-import FormData from 'form-data';
-import fetch from 'node-fetch';
-
+import { LAMPORTS_PER_SOL, AccountInfo } from '@solana/web3.js';
 export const getUnixTs = () => {
   return new Date().getTime() / 1000;
 };
@@ -59,23 +53,8 @@ export function chunks(array, size) {
   );
 }
 
-export function cachePath(env: string, cacheName: string) {
-  return path.join(CACHE_PATH, `${env}-${cacheName}`);
-}
-
-export function loadCache(cacheName: string, env: string) {
-  const path = cachePath(env, cacheName);
-  return fs.existsSync(path)
-    ? JSON.parse(fs.readFileSync(path).toString())
-    : undefined;
-}
-
-export function saveCache(cacheName: string, env: string, cacheContent) {
-  fs.writeFileSync(cachePath(env, cacheName), JSON.stringify(cacheContent));
-}
-
-export function parsePrice(price): number {
-  return Math.ceil(parseFloat(price) * LAMPORTS_PER_SOL);
+export function parsePrice(price: string, mantissa: number = LAMPORTS_PER_SOL) {
+  return Math.ceil(parseFloat(price) * mantissa);
 }
 
 export async function upload(data: FormData, manifest, index) {
@@ -91,3 +70,59 @@ export async function upload(data: FormData, manifest, index) {
     )
   ).json();
 }
+
+export const getMultipleAccounts = async (
+  connection: any,
+  keys: string[],
+  commitment: string,
+) => {
+  const result = await Promise.all(
+    chunks(keys, 99).map(chunk =>
+      getMultipleAccountsCore(connection, chunk, commitment),
+    ),
+  );
+
+  const array = result
+    .map(
+      a =>
+        //@ts-ignore
+        a.array.map(acc => {
+          if (!acc) {
+            return undefined;
+          }
+
+          const { data, ...rest } = acc;
+          const obj = {
+            ...rest,
+            data: Buffer.from(data[0], 'base64'),
+          } as AccountInfo<Buffer>;
+          return obj;
+        }) as AccountInfo<Buffer>[],
+    )
+    //@ts-ignore
+    .flat();
+  return { keys, array };
+};
+
+const getMultipleAccountsCore = async (
+  connection: any,
+  keys: string[],
+  commitment: string,
+) => {
+  const args = connection._buildArgs([keys], commitment, 'base64');
+
+  const unsafeRes = await connection._rpcRequest('getMultipleAccounts', args);
+  if (unsafeRes.error) {
+    throw new Error(
+      'failed to get info about account ' + unsafeRes.error.message,
+    );
+  }
+
+  if (unsafeRes.result.value) {
+    const array = unsafeRes.result.value as AccountInfo<string[]>[];
+    return { keys, array };
+  }
+
+  // TODO: fix
+  throw new Error();
+};
