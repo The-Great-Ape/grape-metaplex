@@ -333,16 +333,16 @@ const getSetupForTicketing = async (
     // NOTE this token impl will not work till you get decimal mantissa and multiply...
     /// ex from cli wont work since you dont have a Signer, but an anchor.Wallet
     /*
-    const token = new Token(
-        anchorProgram.provider.connection,
-        //@ts-ignore
-        fairLaunchObj.treasuryMint,
-        TOKEN_PROGRAM_ID,
-        walletKeyPair,
-      );
-      const mintInfo = await token.getMintInfo();
-      amountNumber = Math.ceil(amountNumber * 10 ** mintInfo.decimals);
-    */
+  const token = new Token(
+      anchorProgram.provider.connection,
+      //@ts-ignore
+      fairLaunchObj.treasuryMint,
+      TOKEN_PROGRAM_ID,
+      walletKeyPair,
+    );
+    const mintInfo = await token.getMintInfo();
+    amountNumber = Math.ceil(amountNumber * 10 ** mintInfo.decimals);
+  */
     instructions.push(
       Token.createApproveInstruction(
         TOKEN_PROGRAM_ID,
