@@ -40,7 +40,7 @@ import { getMultipleAccounts } from '../accounts/getMultipleAccounts';
 import { getProgramAccounts } from './web3';
 import { createPipelineExecutor } from '../../utils/createPipelineExecutor';
 
-export const USE_SPEED_RUN = true;
+export const USE_SPEED_RUN = false;
 const WHITELISTED_METADATA = ['67htT7jqnCAggXZguyNGcE8t4Qmd3ATAbmhvkKyUTCRk'];
 const WHITELISTED_AUCTION = ['DQQJwcsTZj4UyUP26eYHS6MiVJtS2pdAQ9cJduS8opju'];
 const AUCTION_TO_METADATA: Record<string, string[]> = {
@@ -400,7 +400,17 @@ const pullMetadataByCreators = (
 ): Promise<any> => {
   console.log('pulling optimized nfts');
 
-  const whitelistedCreators = Object.values(state.whitelistedCreatorsByCreator);
+  const whitelistedCreators = [
+    state.whitelistedCreatorsByCreator[
+      'GrapevviL94JZRiZwn2LjpWtmDacXU8QhAJvzpUMMFdL'
+    ],
+    state.whitelistedCreatorsByCreator[
+      '72RkLRknp3qXeVqtpQp3NRfmgTYHmaC9W4w2tiQy3ZrX'
+    ],
+    state.whitelistedCreatorsByCreator[
+      '9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94'
+    ],
+  ];
 
   const setter: UpdateStateValueFunc = async (prop, key, value) => {
     if (prop === 'metadataByMint') {
