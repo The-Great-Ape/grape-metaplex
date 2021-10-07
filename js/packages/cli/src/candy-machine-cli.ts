@@ -219,20 +219,14 @@ programCommand('verify').action(async (directory, cmd) => {
             const text = await check.text();
             if (!text.match(/Not found/i)) {
               if (text.length == 0) {
-                log.debug(
-                  'Name',
-                  name,
-                  'with',
-                  uri,
-                  'has zero length, failing',
-                );
+                log.info('Name', name, 'with', uri, 'has zero length, failing');
                 cacheItem.onChain = false;
                 allGood = false;
               } else {
-                log.debug('Name', name, 'with', uri, 'checked out');
+                log.info('Name', name, 'with', uri, 'checked out');
               }
             } else {
-              log.debug(
+              log.info(
                 'Name',
                 name,
                 'with',
@@ -243,7 +237,7 @@ programCommand('verify').action(async (directory, cmd) => {
               allGood = false;
             }
           } else {
-            log.debug(
+            log.info(
               'Name',
               name,
               'with',
@@ -255,12 +249,12 @@ programCommand('verify').action(async (directory, cmd) => {
             allGood = false;
           }
         } else {
-          log.debug('Name', name, 'with', uri, 'lacked image in json, failing');
+          log.info('Name', name, 'with', uri, 'lacked image in json, failing');
           cacheItem.onChain = false;
           allGood = false;
         }
       } else {
-        log.debug('Name', name, 'with', uri, 'returned no json from link');
+        log.info('Name', name, 'with', uri, 'returned no json from link');
         cacheItem.onChain = false;
         allGood = false;
       }
@@ -367,6 +361,7 @@ programCommand('show')
         candyMachine,
       );
       log.info('...Candy Machine...');
+      log.info('Key:', candyMachine.toBase58());
       //@ts-ignore
       log.info('authority: ', machine.authority.toBase58());
       //@ts-ignore
@@ -581,7 +576,7 @@ programCommand('update_candy_machine')
       );
     if (lamports)
       log.info(` - updated price: ${lamports} lamports (${price} SOL)`);
-    log.info('updated_candy_machine finished', tx);
+    log.info('update_candy_machine finished', tx);
   });
 
 programCommand('mint_one_token').action(async (directory, cmd) => {
