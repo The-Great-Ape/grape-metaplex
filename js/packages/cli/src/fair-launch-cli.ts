@@ -1161,8 +1161,9 @@ program
       )
     )[0];
 
-    const fairLaunchLotteryBitmap = //@ts-ignore
-    (await getFairLaunchLotteryBitmap(fairLaunchObj.tokenMint))[0];
+    const fairLaunchLotteryBitmap = ( //@ts-ignore
+      await getFairLaunchLotteryBitmap(fairLaunchObj.tokenMint)
+    )[0];
 
     await adjustTicket({
       amountNumber,
@@ -1763,8 +1764,9 @@ program
       )
     )[0];
 
-    const fairLaunchLotteryBitmap = //@ts-ignore
-    (await getFairLaunchLotteryBitmap(fairLaunchObj.tokenMint))[0];
+    const fairLaunchLotteryBitmap = ( //@ts-ignore
+      await getFairLaunchLotteryBitmap(fairLaunchObj.tokenMint)
+    )[0];
 
     const ticket = await anchorProgram.account.fairLaunchTicket.fetch(
       fairLaunchTicket,
@@ -1940,8 +1942,9 @@ program
     const fairLaunchObj = await anchorProgram.account.fairLaunch.fetch(
       fairLaunchKey,
     );
-    const fairLaunchLotteryBitmap = //@ts-ignore
-    (await getFairLaunchLotteryBitmap(fairLaunchObj.tokenMint))[0];
+    const fairLaunchLotteryBitmap = ( //@ts-ignore
+      await getFairLaunchLotteryBitmap(fairLaunchObj.tokenMint)
+    )[0];
 
     await anchorProgram.rpc.startPhaseThree({
       accounts: {
@@ -1981,9 +1984,8 @@ program
     const fairLaunchObj = await anchorProgram.account.fairLaunch.fetch(
       fairLaunchKey,
     );
-    const tokenAccount = ( //@ts-ignore
-      await getAtaForMint(fairLaunchObj.tokenMint, walletKeyPair.publicKey)
-    )[0];
+    const tokenAccount = //@ts-ignore
+    (await getAtaForMint(fairLaunchObj.tokenMint, walletKeyPair.publicKey))[0];
 
     const exists = await anchorProgram.provider.connection.getAccountInfo(
       tokenAccount,
@@ -2389,7 +2391,7 @@ program
 
       console.log('Doing lottery for', numWinnersRemaining);
       while (numWinnersRemaining > 0) {
-        const rand = Math.round(Math.random() * (chosen.length - 1));
+        const rand = Math.floor(Math.random() * chosen.length);
         if (chosen[rand].chosen != true && chosen[rand].eligible) {
           chosen[rand].chosen = true;
           numWinnersRemaining--;
