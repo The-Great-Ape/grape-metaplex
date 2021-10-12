@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 
 export const HomeView = () => {
   return (
-    <Redirect to="/auction/Azbn9BY6vtg67uDHqJtNf6h8NATYW96gpZ5wRzUYSJpx" />
+    <Redirect to="/auction/DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17" />
   );
   const { isLoading, store } = useMeta();
   const { isConfigured } = useStore();

@@ -42,20 +42,20 @@ import { createPipelineExecutor } from '../../utils/createPipelineExecutor';
 
 export const USE_SPEED_RUN = true;
 const WHITELISTED_METADATA = ['Gu4PwXvXVnHjwt2or7cZQdk9PpN3JSYoLHyUsmKFQf25'];
-const WHITELISTED_AUCTION = ['Azbn9BY6vtg67uDHqJtNf6h8NATYW96gpZ5wRzUYSJpx'];
+const WHITELISTED_AUCTION = ['DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17'];
 const AUCTION_TO_METADATA: Record<string, string[]> = {
-  Azbn9BY6vtg67uDHqJtNf6h8NATYW96gpZ5wRzUYSJpx: [
+  DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17: [
     'Gu4PwXvXVnHjwt2or7cZQdk9PpN3JSYoLHyUsmKFQf25',
   ],
 };
 const AUCTION_TO_VAULT: Record<string, string> = {
-  Azbn9BY6vtg67uDHqJtNf6h8NATYW96gpZ5wRzUYSJpx:
-    '2tNNV9CjG82rVWJP6deDXygzsumrUMzLzKaaHHo1y2yx',
+  DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17:
+    '3ccUqBZkdSiTQo6P1M9ceBedLrMdQQyXPhXUpDFQpiE3',
 };
 const WHITELISTED_AUCTION_MANAGER = [
-  'AfCJT9zttkYj32q5tDHEpFqSjbeuo9CbSmeSY8A545FW',
+  'Bo1jeLYfstzeKk7mj17LLNebCeT8bqeqPsAF47MFMnHo',
 ];
-const WHITELISTED_VAULT = ['2tNNV9CjG82rVWJP6deDXygzsumrUMzLzKaaHHo1y2yx'];
+const WHITELISTED_VAULT = ['3ccUqBZkdSiTQo6P1M9ceBedLrMdQQyXPhXUpDFQpiE3'];
 
 export const limitedLoadAccounts = async (connection: Connection) => {
   const tempCache: MetaState = getEmptyMetaState();
@@ -401,15 +401,15 @@ const pullMetadataByCreators = (
   console.log('pulling optimized nfts');
 
   const whitelistedCreators = [
-    state.whitelistedCreatorsByCreator[
-      'GrapevviL94JZRiZwn2LjpWtmDacXU8QhAJvzpUMMFdL'
-    ],
+    // state.whitelistedCreatorsByCreator[
+    //   'GrapevviL94JZRiZwn2LjpWtmDacXU8QhAJvzpUMMFdL'
+    // ],
     state.whitelistedCreatorsByCreator[
       '72RkLRknp3qXeVqtpQp3NRfmgTYHmaC9W4w2tiQy3ZrX'
     ],
-    state.whitelistedCreatorsByCreator[
-      '9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94'
-    ],
+    // state.whitelistedCreatorsByCreator[
+    //   '9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94'
+    // ],
   ];
 
   const setter: UpdateStateValueFunc = async (prop, key, value) => {

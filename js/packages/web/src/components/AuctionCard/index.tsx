@@ -271,6 +271,19 @@ export const AuctionCard = ({
     shouldHideInstantSale ||
     auctionView.vault.info.state === VaultState.Deactivated;
 
+  if (doesInstantSaleHasNoItems) {
+    return (
+      <Button
+        type="primary"
+        size="large"
+        className="action-btn"
+        disabled={true}
+      >
+        Item Sold
+      </Button>
+    );
+  }
+
   if (shouldHide) {
     return <></>;
   }
