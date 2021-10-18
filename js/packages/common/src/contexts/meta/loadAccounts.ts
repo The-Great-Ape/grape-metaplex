@@ -50,7 +50,7 @@ import { createPipelineExecutor } from '../../utils/createPipelineExecutor';
 import { programIds } from '../..';
 const MULTIPLE_ACCOUNT_BATCH_SIZE = 100;
 
-export const USE_SPEED_RUN = true;
+export const USE_SPEED_RUN = false;
 const WHITELISTED_METADATA = ['Gu4PwXvXVnHjwt2or7cZQdk9PpN3JSYoLHyUsmKFQf25'];
 const WHITELISTED_AUCTION = ['DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17'];
 const AUCTION_TO_METADATA: Record<string, string[]> = {

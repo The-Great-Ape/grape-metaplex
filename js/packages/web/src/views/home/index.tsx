@@ -4,12 +4,8 @@ import { useStore } from '@oyster/common';
 import { useMeta } from '../../contexts';
 import { AuctionListView } from './auctionList';
 import { SetupView } from './setup';
-import { Redirect } from 'react-router-dom';
 
 export const HomeView = () => {
-  return (
-    <Redirect to="/auction/DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17" />
-  );
   const { isLoading, store } = useMeta();
   const { isConfigured } = useStore();
 
