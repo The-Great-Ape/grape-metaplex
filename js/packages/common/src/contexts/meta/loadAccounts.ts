@@ -51,21 +51,21 @@ import { programIds } from '../..';
 const MULTIPLE_ACCOUNT_BATCH_SIZE = 100;
 
 export const USE_SPEED_RUN = false;
-const WHITELISTED_METADATA = ['Gu4PwXvXVnHjwt2or7cZQdk9PpN3JSYoLHyUsmKFQf25'];
-const WHITELISTED_AUCTION = ['DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17'];
+const WHITELISTED_METADATA = ['98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte'];
+const WHITELISTED_AUCTION = ['D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e'];
 const AUCTION_TO_METADATA: Record<string, string[]> = {
-  DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17: [
-    'Gu4PwXvXVnHjwt2or7cZQdk9PpN3JSYoLHyUsmKFQf25',
+  D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e: [
+    '98vYFjBYS9TguUMWQRPjy2SZuxKuUMcqR4vnQiLjZbte',
   ],
 };
 const AUCTION_TO_VAULT: Record<string, string> = {
-  DkPFgBcbeRMi6RzoAzF8nf2cCCMd47sQaLidY9uQrU17:
-    '3ccUqBZkdSiTQo6P1M9ceBedLrMdQQyXPhXUpDFQpiE3',
+  D8wMB5iLZnsV7XQjpwqXaDynUtFuDs7cRXvEGNj1NF1e:
+    '3wHCBd3fYRPWjd5GqzrXanLJUKRyU3nECKbTPKfVwcFX',
 };
 const WHITELISTED_AUCTION_MANAGER = [
-  'Bo1jeLYfstzeKk7mj17LLNebCeT8bqeqPsAF47MFMnHo',
+  '3HD2C8oCL8dpqbXo8hq3CMw6tRSZDZJGajLxnrZ3ZkYx',
 ];
-const WHITELISTED_VAULT = ['3ccUqBZkdSiTQo6P1M9ceBedLrMdQQyXPhXUpDFQpiE3'];
+const WHITELISTED_VAULT = ['3wHCBd3fYRPWjd5GqzrXanLJUKRyU3nECKbTPKfVwcFX'];
 
 export const pullStoreMetadata = async (
   connection: Connection,
@@ -907,17 +907,7 @@ const pullMetadataByCreators = (
 ): Promise<any> => {
   console.log('pulling optimized nfts');
 
-  const whitelistedCreators = [
-    // state.whitelistedCreatorsByCreator[
-    //   'GrapevviL94JZRiZwn2LjpWtmDacXU8QhAJvzpUMMFdL'
-    // ],
-    state.whitelistedCreatorsByCreator[
-      '72RkLRknp3qXeVqtpQp3NRfmgTYHmaC9W4w2tiQy3ZrX'
-    ],
-    // state.whitelistedCreatorsByCreator[
-    //   '9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94'
-    // ],
-  ];
+  const whitelistedCreators = Object.values(state.whitelistedCreatorsByCreator);
 
   const setter: UpdateStateValueFunc = async (prop, key, value) => {
     if (prop === 'metadataByMint') {
